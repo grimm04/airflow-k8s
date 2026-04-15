@@ -1,0 +1,28 @@
+name: 'lakehouse_analytics'
+version: '1.0.0'
+
+profile: 'lakehouse_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+seeds:
+  lakehouse_analytics:
+    schema: landing
+
+models:
+  lakehouse_analytics:
+    staging:
+      +tags: staging
+      +schema: staging
+    curated:
+      +tags: curated
+      +schema: curated

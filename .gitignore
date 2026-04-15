@@ -32,3 +32,8 @@ __pycache__/
 *.pyo
 .env
 venv/
+
+
+target/
+dbt_packages/
+logs/

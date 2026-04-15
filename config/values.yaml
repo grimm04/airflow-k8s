@@ -80,11 +80,11 @@ airflowVersion: "3.1.8"
 # Images
 images:
   airflow:
-    repository: ~
-    tag: ~
-    # Specifying digest takes precedence over tag.
-    digest: ~
+    repository: registry.sicabe.com/airflow-custom
+    tag: v1.0.0      # ganti ini tiap update
     pullPolicy: IfNotPresent
+    # Specifying digest takes precedence over tag.
+    digest: ~ 
   # To avoid images with user code, you can turn this to 'true' and
   # all the 'run-airflow-migrations' and 'wait-for-airflow-migrations' containers/jobs
   # will use the images from 'defaultAirflowRepository:defaultAirflowTag' values

@@ -1,0 +1,6 @@
+dlt[postgres]
+duckdb
+dlt[filesystem]
+s3fs
+dbt-trino==1.9.3
+dbt-core==1.10.10
