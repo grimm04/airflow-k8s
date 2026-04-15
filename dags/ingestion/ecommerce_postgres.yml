@@ -1,0 +1,85 @@
+# ============================================================
+# Ingestion Config — PostgreSQL to MinIO (Raw) + dbt Silver/Gold
+# ============================================================
+# Usage:
+#   This config is read by dag_postgres_to_minio_dbt.py
+#   to orchestrate the entire ELT pipeline
+# ============================================================
+
+source:
+  # PostgreSQL source
+  type: postgres
+  host: 192.168.201.136
+  port: 5432
+  user: devel
+  password: rahasia2024
+  database: test_e
+  
+  # Tables to ingest
+  tables:
+    - name: orders
+      schema: public
+      incremental: true
+      incremental_column: updated_at
+    - name: customers
+      schema: public
+      incremental: true
+      incremental_column: updated_at
+    - name: products
+      schema: public
+      incremental: false  # full load
+    - name: order_items
+      schema: public
+      incremental: true
+      incremental_column: created_at
+
+# Raw layer (Bronze) — MinIO destination
+bronze:
+  type: minio
+  endpoint: http://lakehouse-lakekit-minio.lakehouse.svc.cluster.local:9000
+  bucket: raw
+  namespace: ecommerce2
+  access_key: minioadmin
+  secret_key: LuuxHCNcehVJJ2nUZgl4tLYyIB0Mtn0T
+  format: parquet
+  compression: snappy
+
+# Transformation
+transforms:
+  # Silver layer
+  silver:
+    enabled: true
+    dbt_profile: default
+    dbt_project_dir: /opt/airflow/dbt
+    dbt_models: staging
+    dbt_select: tag:silver
+    dbt_full_refresh: false
+    
+  # Gold layer — analytics ready
+  gold:
+    enabled: true
+    dbt_profile: default
+    dbt_project_dir: /opt/airflow/dbt
+    dbt_models: analytics
+    dbt_select: tag:gold
+    dbt_full_refresh: false
+
+# Metadata registration
+# metadata:
+#   openmetadata_server: http://openmetadata-server:8585/api
+#   service_name: test_e_postgres
+#   description: "ECommerce PostgreSQL → MinIO → dbt transforms"
+#   owner: data-engineering
+#   tags:
+#     - postgres
+#     - ecommerce
+#     - dbt
+#     - minio
+
+# Pipeline settings
+pipeline:
+  schedule: "0 2 * * *"  # Daily at 02:00
+  max_active_runs: 1
+  retries: 2
+  retry_delay_minutes: 5
+  email_on_failure: true
