@@ -14,6 +14,7 @@ class DbtCoreOperator(BaseOperator):
         dbt_vars: dict = None,
         full_refresh: bool = False,
         dbt_log_path: str = "/tmp/dbt-logs",  
+        dbt_target_path: str = "/tmp/dbt-target",
         **kwargs,
     ) -> None:
         super().__init__(**kwargs)
@@ -26,6 +27,7 @@ class DbtCoreOperator(BaseOperator):
         self.dbt_vars = dbt_vars or {}
         self.full_refresh = full_refresh
         self.dbt_log_path = dbt_log_path
+        self.dbt_target_path = dbt_target_path
 
     def execute(self, context):
         command_args = [
@@ -43,6 +45,7 @@ class DbtCoreOperator(BaseOperator):
             command_args.append("--full-refresh")
             
         command_args.extend(["--log-path", f"{self.dbt_log_path}/{self.task_id}"])
+        command_args.extend(["--target-path", f"{self.dbt_target_path}/{self.task_id}"])
 
         if self.dbt_vars:
             vars_string = " ".join([f"{k}: {v}" for k, v in self.dbt_vars.items()])
