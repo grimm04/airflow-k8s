@@ -49,7 +49,12 @@ class DbtCoreOperator(BaseOperator):
         res: dbtRunnerResult = self.runner.invoke(command_args)
 
         if not res.success:
-            raise AirflowException(f"dbt command failed: {' '.join(command_args)}")
+            exc = getattr(res, 'exception', None)
+            if exc is not None:
+                raise AirflowException(f"dbt command failed with exception: {exc}") from exc
+            raise AirflowException(
+                f"dbt command failed: {' '.join(command_args)}\nResult: {res.result}"
+            )
 
         self.log.info("dbt command executed successfully.")
 

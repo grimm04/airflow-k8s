@@ -6,7 +6,7 @@ lakehouse_analytics:
       user: "{{ env_var('TRINO_USERNAME', 'trino') }}"
       password: "{{ env_var('TRINO_PASSWORD') }}"
       database: iceberg
-      host: trino-coordinator
+      host: localhost
       port: 8081
       schema: staging
       threads: 1
