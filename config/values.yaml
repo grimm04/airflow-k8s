@@ -980,8 +980,16 @@ workers:
 
   # Additional volumes and volume mounts attached to the
   # Airflow Celery workers and pods created with pod-template-file
-  extraVolumes: []
-  extraVolumeMounts: []
+  # extraVolumes: []
+  extraVolumes:
+  - name: gdrive-sa-volume
+    secret:
+      secretName: gdrive-sa
+  extraVolumeMounts:
+  - name: gdrive-sa-volume
+    mountPath: /opt/airflow/dags/credentials
+    readOnly: true
+  # extraVolumeMounts: []
   # Mount additional volumes into workers pods. It can be templated like in the following example:
   #   extraVolumes:
   #     - name: my-templated-extra-volume

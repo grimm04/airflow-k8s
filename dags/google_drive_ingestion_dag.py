@@ -39,7 +39,7 @@ from google.oauth2 import service_account
 # CONFIG — Sesuaikan bagian ini
 # ──────────────────────────────────────────────────────────────
 
-SERVICE_ACCOUNT_FILE = "/opt/airflow/dags/credentials/gdrive_sa.json"
+SERVICE_ACCOUNT_FILE = "/opt/airflow/credentials/gdrive_sa.json"
 
 DRIVE_FOLDERS = {
     "api data": "1V4LpbYxR7R5cRYOW4xuAQlP1t_oAi7gj",

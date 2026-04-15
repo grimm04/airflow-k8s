@@ -37,3 +37,12 @@ venv/
 target/
 dbt_packages/
 logs/
+
+
+credentials/
+*.json
+*_sa.json
+
+vault/secrets/*
+*.json
+.env
