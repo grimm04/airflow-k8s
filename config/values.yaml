@@ -3638,12 +3638,13 @@ dags:
     ## optional subpath for dag volume mount
     subPath: ~
   gitSync:
-    enabled: false
+    enabled: true
 
     # git repo clone url
     # ssh example: git@github.com:apache/airflow.git
     # https example: https://github.com/apache/airflow.git
-    repo: https://github.com/grimm04/airflow-k8s
+    # repo: https://github.com/grimm04/airflow-k8s.git
+    repo: https://github.com/grimm04/airflow-k8s.git
     branch: main
     rev: HEAD
     # The git revision (branch, tag, or hash) to check out, v4 only
