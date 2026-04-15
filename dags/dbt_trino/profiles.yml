@@ -6,8 +6,8 @@ lakehouse_analytics:
       user: "{{ env_var('TRINO_USERNAME', 'trino') }}"
       password: "{{ env_var('TRINO_PASSWORD') }}"
       database: iceberg
-      host: localhost
-      port: 8081
+      host: lakehouse-lakekit-trino.lakehouse.svc.cluster.local
+      port: 8080
       schema: staging
       threads: 1
       http_scheme: http
