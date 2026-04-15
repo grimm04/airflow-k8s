@@ -27,7 +27,7 @@ with DAG(
     description="DAG contoh untuk verifikasi git-sync dari GitHub",
     default_args=default_args,
     start_date=datetime(2024, 1, 1),
-    schedule_interval="@daily",  # Jalan setiap hari
+    schedule="@daily",  # Jalan setiap hari
     catchup=False,                # Jangan jalankan run yang terlewat
     tags=["example", "test"],
 ) as dag:
