@@ -51,7 +51,7 @@ with DAG(
     task_python_info = PythonOperator(
         task_id="python_info",
         python_callable=print_python_info,
-        provide_context=True,
+        # provide_context=True,
     )
 
     # Task 3: Verifikasi environment
