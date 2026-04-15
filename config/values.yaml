@@ -81,7 +81,7 @@ airflowVersion: "3.1.8"
 images:
   airflow:
     repository: registry.sicabe.com/airflow-custom
-    tag: v1.0.0      # ganti ini tiap update
+    tag: v1.0.1      # ganti ini tiap update
     pullPolicy: IfNotPresent
     # Specifying digest takes precedence over tag.
     digest: ~ 
