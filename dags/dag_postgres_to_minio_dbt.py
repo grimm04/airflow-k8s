@@ -29,7 +29,7 @@ except ModuleNotFoundError:
     from airflow.operators.bash_operator import BashOperator
 
 # Load ingestion config
-CONFIG_FILE = "/opt/airflow/dags/ingestion/ecommerce_postgres.yml"
+CONFIG_FILE = "/opt/airflow/dags/repo/dags/ingestion/ecommerce_postgres.yml"
 with open(CONFIG_FILE, "r") as f:
     CONFIG = yaml.safe_load(f)
 
